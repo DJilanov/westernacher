@@ -1,0 +1,15 @@
+<input 
+  [(ngModel)]="searchQuery"
+  [typeahead]="products"
+  [typeaheadItemTemplate]="customItemTemplate"
+  [typeaheadOptionField]="'typeahed'"  
+  [typeaheadOptionsLimit]="7"
+  (typeaheadOnSelect)="onProductSelect($event)"
+  class="form-control"
+  placeholder="{{language.getTexts('searchFor')}}">
+
+<template #customItemTemplate let-model="item" let-index="index">
+  <h5>
+    <span>{{model.title[language.language]}}</span>
+  </h5>
+</template>

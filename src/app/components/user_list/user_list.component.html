@@ -1,0 +1,49 @@
+<table class="table table-striped">
+  <!-- Integrate table head based on the interface properties -->
+  <!-- Integrate translation -->
+  <thead>
+    <tr>
+      <td>
+        {{ language.getTexts('firstName') }}
+      </td>
+      <td>
+        {{ language.getTexts('lastName') }}
+      </td>
+      <td>
+        {{ language.getTexts('emailAddress') }}
+      </td>
+      <td>
+        {{ language.getTexts('dateOfBirth') }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" name="firstName"/>
+      </td>
+      <td>
+        <input type="text" name="lastName"/>
+      </td>
+      <td>
+        <input type="text" name="emailAddress"/>
+      </td>
+      <td>
+        <input type="text" name="dateOfBirth"/>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let user of users">
+        <td name="firstName">{{ user.firstName }}</td>
+        <td name="lastName">{{ user.lastName }}</td>
+        <td name="emailAddress">{{ user.emailAddress }}</td>
+        <td name="dateOfBirth">{{ user.dateOfBirth }}</td>
+      </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">
+        status of the information
+      </td>
+    </tr>
+  </tfoot>
+</table>

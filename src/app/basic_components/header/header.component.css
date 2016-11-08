@@ -1,0 +1,8 @@
+.flag {
+    margin-left: 20px;
+    max-width: 35px;
+}
+
+.flag img {
+    max-width: 100%;
+}

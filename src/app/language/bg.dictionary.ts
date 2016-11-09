@@ -8,5 +8,10 @@ export class BulgarianDictionary {
         "lastName": "Фамилия",
         "emailAddress": "Емайл адрес",
         "dateOfBirth": "Дата на раждане",
+        "firstNameInput": "Въведете първото име",
+        "lastNameInput": "Въведете фамилията",
+        "emailAddressInput": "Въведете емайл адреса",
+        "dateOfBirthInput": "Въведете датата на раждане",
+        "addNewUser": "Добавяне на нов потребител"
     }
 }

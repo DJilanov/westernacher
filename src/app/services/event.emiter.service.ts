@@ -9,13 +9,19 @@ import { Config } from '../config';
  */
 export class EventEmiterService {
 
+    public addNewUser: EventEmitter<any>;
     public dataFetched: EventEmitter<any>;
 
     constructor() {
+        this.addNewUser = new EventEmitter();
         this.dataFetched = new EventEmitter();
     }
 
     public emitFetchedData(data) {
         this.dataFetched.emit(data);
+    }
+
+    public emitAddNewUser(data) {
+        this.addNewUser.emit(data);
     }
 }

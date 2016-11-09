@@ -1,6 +1,7 @@
 import { Component, Input, Output } from '@angular/core';
 import { Language } from '../../language/language.service';
 import { CachingService } from '../../services/caching.service';
+import { EventEmiterService } from '../../services/event.emiter.service';
 
 @Component({
     selector: 'users-list',
@@ -13,14 +14,26 @@ export class UserListComponent {
     @Input()
     users: Array<Object> = [];
 
-    // used to filter and play with the users array on the view
-    @Input()
-    filteredUsers: Array<Object> = [];
+    private sortByColumn():void {
+        let dataset = event.target['dataset'];
+        if(dataset.asc == 'true') {
+            this.users = this.users.sort((a,b)=>b[dataset.sortBy]-a[dataset.sortBy]);
+            dataset.asc = 'false';
+        } else {
+            this.users = this.users.sort((a,b)=>a[dataset.sortBy]-b[dataset.sortBy]);
+            dataset.asc = 'true';
+        }
+    }
+
+    private addNewUser():void {
+        this.eventEmiterService.emitAddNewUser({'title':'addNewUser'});
+    }
 
     /**
      * @constructor on init
      */
     public constructor(
-        private language: Language
+        private language: Language,
+        private eventEmiterService: EventEmiterService
     ) {}
 }

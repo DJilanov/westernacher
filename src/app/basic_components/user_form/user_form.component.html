@@ -1,0 +1,57 @@
+<div class="form-section">
+  <form  #feedback="ngForm" (ngSubmit)="onSubmit(ngForm)" [formGroup]="ngForm">
+    <div class="form-group">
+     <div class="col-xs-12">
+        <label for="firstNameInput">{{ language.getTexts('firstName') }}</label>
+        <input 
+          [formControl]="ngForm.controls['firstName']" 
+          required="true" 
+          type="text" 
+          class="form-control" 
+          name="firstName" 
+          id="firstNameInput"
+          placeholder="{{ language.getTexts('firstNameInput') }}">
+     </div>
+     <div class="col-xs-12">
+        <label for="firstNameInput">{{ language.getTexts('lastName') }}</label>
+        <input 
+          [formControl]="ngForm.controls['lastName']" 
+          required="true" 
+          type="text" 
+          class="form-control" 
+          name="lastName" 
+          id="lastNameInput"
+          placeholder="{{ language.getTexts('lastNameInput') }}">
+     </div>
+     <div class="col-xs-12">
+        <label for="firstNameInput">{{ language.getTexts('emailAddress') }}</label>
+        <input 
+          [formControl]="ngForm.controls['emailAddress']" 
+          required="true" 
+          type="text" 
+          class="form-control" 
+          name="emailAddress" 
+          id="emailAddressInput"
+          placeholder="{{ language.getTexts('emailAddressInput') }}">
+     </div>
+     <div class="col-xs-12">
+        <label for="firstNameInput">{{ language.getTexts('dateOfBirth') }}</label>
+        <input 
+          [formControl]="ngForm.controls['dateOfBirth']" 
+          required="true" 
+          type="text" 
+          class="form-control" 
+          name="dateOfBirth" 
+          id="dateOfBirthInput"
+          placeholder="{{ language.getTexts('dateOfBirthInput') }}">
+     </div>
+     <div class="col-xs-12">
+        <button 
+          [disabled]="!ngForm.valid"
+          class="btn btn-default">
+          тест
+        </button>
+     </div>
+    </div>
+  </form>
+</div>

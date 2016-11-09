@@ -2,32 +2,22 @@
   <!-- Integrate table head based on the interface properties -->
   <!-- Integrate translation -->
   <thead>
-    <tr>
-      <td>
+    <tr (click)="sortByColumn();">
+      <td data-sort-by="firstName" data-asc="false">
         {{ language.getTexts('firstName') }}
+        <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
-      <td>
+      <td data-sort-by="lastName" data-asc="false">
         {{ language.getTexts('lastName') }}
+        <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
-      <td>
+      <td data-sort-by="emailAddress" data-asc="false">
         {{ language.getTexts('emailAddress') }}
+        <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
-      <td>
+      <td data-sort-by="dateOfBirth" data-asc="false">
         {{ language.getTexts('dateOfBirth') }}
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <input type="text" name="firstName"/>
-      </td>
-      <td>
-        <input type="text" name="lastName"/>
-      </td>
-      <td>
-        <input type="text" name="emailAddress"/>
-      </td>
-      <td>
-        <input type="text" name="dateOfBirth"/>
+        <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
     </tr>
   </thead>
@@ -37,6 +27,11 @@
         <td name="lastName">{{ user.lastName }}</td>
         <td name="emailAddress">{{ user.emailAddress }}</td>
         <td name="dateOfBirth">{{ user.dateOfBirth }}</td>
+      </tr>
+      <tr>
+        <td name="addNewUser" colspan="4" (click)="addNewUser()">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </td>
       </tr>
   </tbody>
   <tfoot>

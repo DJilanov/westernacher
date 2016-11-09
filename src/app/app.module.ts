@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { Ng2Webstorage } from 'ng2-webstorage';
 import { BrowserModule }  from '@angular/platform-browser';
 import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { FormsModule, ReactiveFormsModule, Validators }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 // Language 
 import { Language } from './language/language.service';
@@ -14,6 +14,7 @@ import { BulgarianDictionary } from './language/bg.dictionary';
 // Basic Components
 import { ButtonComponent } from './basic_components/button/button.component';
 import { HeaderComponent } from './basic_components/header/header.component';
+import { UserFormComponent } from './basic_components/user_form/user_form.component';
 
 // Components
 import { AppComponent } from './app.component';
@@ -21,7 +22,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { DetailsComponent } from './components/details/details.component';
 import { UserListComponent } from './components/user_list/user_list.component';
-import { PageNotFoundComponent } from './components/page_not_found/page_not_found.component';
+import { UserModalComponent } from './components/user_modal/user_modal.component';
 
 // Config
 import { Config } from './config';
@@ -44,14 +45,17 @@ import { ErrorHandlerService } from './services/error.handler.service';
     ],
     // Components & Views
     declarations: [ 
+        // Main components
         AppComponent,
         HomeComponent,
         SearchComponent,
         DetailsComponent,
         UserListComponent,
-        PageNotFoundComponent,
+        UserModalComponent,
+        // Basic components
         ButtonComponent,
         HeaderComponent,
+        UserFormComponent,
     ],
     // Bootstraping
     bootstrap: [ 

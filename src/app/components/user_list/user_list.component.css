@@ -1,10 +1,13 @@
-user {
-    cursor: pointer;
-    display: table-row;
-}
-
 table {
     text-align: center;
+}
+
+table tbody {
+    cursor: pointer;
+}
+
+table tbody tr:hover {
+    background-color: lightgray;
 }
 
 table tfoot td {

@@ -1,0 +1,16 @@
+<div class="modal fade" bsModal #addNewUserModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="addNewUserModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{ language.getTexts(title) }}</h4>
+      </div>
+      <div class="modal-body">
+        <user-form [formOptions]="user"></user-form>
+      </div>
+    </div>
+  </div>
+</div>

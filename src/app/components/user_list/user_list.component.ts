@@ -1,5 +1,5 @@
 import { Component, Input, Output } from '@angular/core';
-import { Language } from '../../language/language.service';
+import { Dictionary } from '../../language/dictionary.service';
 import { CachingService } from '../../services/caching.service';
 import { EventEmiterService } from '../../services/event.emiter.service';
 
@@ -25,15 +25,42 @@ export class UserListComponent {
         }
     }
 
+
+    private editUser(user):void {
+        this.eventEmiterService.emitShowUserModal({
+            'user': {
+                'firstName': user.firstName,
+                'lastName': user.lastName,
+                'emailAddress': user.emailAddress,
+                'dateOfBirth': user.dateOfBirth,
+                'id': user.id
+            },
+            'action': 'update',
+            'title':'editUser', 
+            "btnText": "editUser"
+        });
+    }
+
     private addNewUser():void {
-        this.eventEmiterService.emitAddNewUser({'title':'addNewUser'});
+        this.eventEmiterService.emitShowUserModal({
+            'user': {
+                'firstName': '',
+                'lastName': '',
+                'emailAddress': '',
+                'dateOfBirth': '',
+                'id': ''
+            },
+            'action': 'create',
+            'title':'addNewUser', 
+            "btnText": "addNewUser"
+        });
     }
 
     /**
      * @constructor on init
      */
     public constructor(
-        private language: Language,
+        private dictionary: Dictionary,
         private eventEmiterService: EventEmiterService
     ) {}
 }

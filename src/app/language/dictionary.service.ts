@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Config } from '../config';
-import { EnglishDictionary } from './en.dictionary.ts';
-import { BulgarianDictionary } from './bg.dictionary.ts';
+import { EnglishDictionary } from './en.dictionary';
+import { BulgarianDictionary } from './bg.dictionary';
 
 @Injectable()
-export class Language {
+export class Dictionary {
     // the variables containing the language jsons
     // will contain the default language
     private language: string = ''; 
     // will return the texts from witch we fill our forms
     public getTexts(text) {
-        return this[this.language].language[text];
+        return this[this.language].dictionary[text];
     };
 
     public setLanguage(language) {

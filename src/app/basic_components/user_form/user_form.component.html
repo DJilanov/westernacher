@@ -1,55 +1,59 @@
 <div class="form-section">
-  <form  #feedback="ngForm" (ngSubmit)="onSubmit(ngForm)" [formGroup]="ngForm">
+  <form  #feedback="ngForm" (ngSubmit)="onSubmit(ngForm, 'submit')" [formGroup]="ngForm">
     <div class="form-group">
      <div class="col-xs-12">
-        <label for="firstNameInput">{{ language.getTexts('firstName') }}</label>
+        <label for="firstName">{{ dictionary.getTexts('firstName') }}</label>
         <input 
           [formControl]="ngForm.controls['firstName']" 
           required="true" 
           type="text" 
           class="form-control" 
           name="firstName" 
-          id="firstNameInput"
-          placeholder="{{ language.getTexts('firstNameInput') }}">
+          placeholder="{{ dictionary.getTexts('firstNameInput') }}">
      </div>
      <div class="col-xs-12">
-        <label for="firstNameInput">{{ language.getTexts('lastName') }}</label>
+        <label for="lastName">{{ dictionary.getTexts('lastName') }}</label>
         <input 
           [formControl]="ngForm.controls['lastName']" 
           required="true" 
           type="text" 
           class="form-control" 
           name="lastName" 
-          id="lastNameInput"
-          placeholder="{{ language.getTexts('lastNameInput') }}">
+          placeholder="{{ dictionary.getTexts('lastNameInput') }}">
      </div>
      <div class="col-xs-12">
-        <label for="firstNameInput">{{ language.getTexts('emailAddress') }}</label>
+        <label for="emailAddress">{{ dictionary.getTexts('emailAddress') }}</label>
         <input 
           [formControl]="ngForm.controls['emailAddress']" 
           required="true" 
           type="text" 
           class="form-control" 
           name="emailAddress" 
-          id="emailAddressInput"
-          placeholder="{{ language.getTexts('emailAddressInput') }}">
+          placeholder="{{ dictionary.getTexts('emailAddressInput') }}">
      </div>
      <div class="col-xs-12">
-        <label for="firstNameInput">{{ language.getTexts('dateOfBirth') }}</label>
+        <label for="dateOfBirth">{{ dictionary.getTexts('dateOfBirth') }}</label>
         <input 
           [formControl]="ngForm.controls['dateOfBirth']" 
           required="true" 
-          type="text" 
+          type="date" 
           class="form-control" 
-          name="dateOfBirth" 
-          id="dateOfBirthInput"
-          placeholder="{{ language.getTexts('dateOfBirthInput') }}">
+          name="dateOfBirth"
+          placeholder="{{ dictionary.getTexts('dateOfBirthInput') }}">
      </div>
      <div class="col-xs-12">
         <button 
+          *ngIf="formOptions"
           [disabled]="!ngForm.valid"
-          class="btn btn-default">
-          тест
+          [class.col-md-6]="formOptions.action == 'update'"
+          class="btn btn-primary col-xs-12">
+          {{ dictionary.getTexts(formOptions.btnText) }}
+        </button>
+        <button 
+          *ngIf="formOptions.action == 'update'"
+          (click)="onSubmit(ngForm, 'delete')"
+          class="btn btn-danger col-md-6 col-xs-12">
+            {{ dictionary.getTexts('deleteBtn') }}
         </button>
      </div>
     </div>

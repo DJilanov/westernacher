@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Language } from '../../language/language.service';
 
 @Component({
     selector: 'home',
@@ -11,7 +10,5 @@ export class HomeComponent {
     @Input()
     users: Array<Object>;
 
-    constructor(
-        private language: Language
-    ) {};
+    constructor() {};
 }

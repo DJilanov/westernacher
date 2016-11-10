@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EnglishDictionary {
-    public language = {
+    public dictionary = {
         "searchFor": "Search for...",
         "firstName": "First name",
         "lastName": "Last name",
@@ -12,6 +12,8 @@ export class EnglishDictionary {
         "lastNameInput": "Enter your last name",
         "emailAddressInput": "Enter your email address",
         "dateOfBirthInput": "Enter your date of birth",
-        "addNewUser": "Add new user"
+        "addNewUser": "Add new user",
+        "editUser": "Update user",
+        "deleteBtn": "Delete user"
     }
 }

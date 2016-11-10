@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { User } from '../../interfaces/user.interface';
-import { Language } from '../../language/language.service';
+import { Dictionary } from '../../language/dictionary.service';
 import { CachingService } from '../../services/caching.service';
+import { FormOptions } from '../../interfaces/form_options.interface';
 import { EventEmiterService } from '../../services/event.emiter.service';
 
 @Component({
@@ -12,26 +13,38 @@ import { EventEmiterService } from '../../services/event.emiter.service';
 
 export class UserModalComponent {
     private title:string;
-    private user: User;
+    // TODO: move that predefinitions to better place
+    private formOptions: FormOptions = {
+        'user': {
+            'firstName': '',
+            'lastName': '',
+            'emailAddress': '',
+            'dateOfBirth': ''
+        },
+        'action': '',
+        'title': '', 
+        "btnText": ''
+    };
 
-    @ViewChild('addNewUserModal') public addNewUserModal;
+    @ViewChild('userModal') public userModal;
 
-    public showAddNewUserModal(options):void {
-        this.addNewUserModal.show();
+    public showUserModal(options):void {
+        this.userModal.show();
         this.title = options.title;
+        this.formOptions = options;
     }
 
-    public hideAddNewUserModal():void {
-        this.addNewUserModal.hide();
+    public hideUserModal():void {
+        this.userModal.hide();
     }
 
     /**
      * @constructor on init
      */
     public constructor(
-        private language: Language,
+        private dictionary: Dictionary,
         private eventEmiterService: EventEmiterService
     ) {
-        this.eventEmiterService.addNewUser.subscribe(options => this.showAddNewUserModal(options));
+        this.eventEmiterService.showUserModal.subscribe(options => this.showUserModal(options));
     }
 }

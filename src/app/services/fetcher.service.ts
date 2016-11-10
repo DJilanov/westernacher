@@ -17,33 +17,33 @@ export class FetcherService {
         return this.http.get( Config.usersUrl );
     }
     /**
-    * @getUsers get specific user
+    * @getUser get specific user
     * @return {Promise} http request
     */
-    public getUser(id) {
+    public getUser(id:string) {
         let usersUrl = Config.changeUsersUrl.replace('{{id}}', id);
         return this.http.get( usersUrl );
     }
     /**
-    * @getUsers create user
+    * @createUser create user
     * @return {Promise} http request
     */
-    public createUser(body) {
+    public createUser(body:Array<any>) {
         return this.http.post( Config.usersUrl, body );
     }
     /**
-    * @getUsers edit user
+    * @updateUser edit user
     * @return {Promise} http request
     */
-    public editUser(body, id) {
+    public updateUser(body:Array<any>, id:string) {
         let usersUrl = Config.changeUsersUrl.replace('{{id}}', id);
         return this.http.patch( usersUrl, body );
     }
     /**
-    * @getUsers delete user
+    * @deleteUser delete user
     * @return {Promise} http request
     */
-    public deleteUser(body, id) {
+    public deleteUser(body:Array<any>, id:string) {
         let usersUrl = Config.changeUsersUrl.replace('{{id}}', id);
         return this.http.delete( usersUrl );
     }

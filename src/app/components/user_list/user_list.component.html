@@ -4,25 +4,25 @@
   <thead>
     <tr (click)="sortByColumn();">
       <td data-sort-by="firstName" data-asc="false">
-        {{ language.getTexts('firstName') }}
+        {{ dictionary.getTexts('firstName') }}
         <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
       <td data-sort-by="lastName" data-asc="false">
-        {{ language.getTexts('lastName') }}
+        {{ dictionary.getTexts('lastName') }}
         <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
       <td data-sort-by="emailAddress" data-asc="false">
-        {{ language.getTexts('emailAddress') }}
+        {{ dictionary.getTexts('emailAddress') }}
         <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
       <td data-sort-by="dateOfBirth" data-asc="false">
-        {{ language.getTexts('dateOfBirth') }}
+        {{ dictionary.getTexts('dateOfBirth') }}
         <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
     </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of users" (click)="editUser(user)">
         <td name="firstName">{{ user.firstName }}</td>
         <td name="lastName">{{ user.lastName }}</td>
         <td name="emailAddress">{{ user.emailAddress }}</td>

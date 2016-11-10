@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { Language } from '../../language/language.service';
+import { Dictionary } from '../../language/dictionary.service';
 
 @Component({
     selector: 'search',
@@ -15,7 +15,7 @@ export class SearchComponent {
     private searchQuery:string = '';
 
     constructor(
-        private language: Language
+        private dictionary: Dictionary
     ) {
       this.addTypeaheadField();
     };

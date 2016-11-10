@@ -1,15 +1,17 @@
-<div class="modal fade" bsModal #addNewUserModal="bs-modal" [config]="{backdrop: 'static'}"
+<div class="modal fade" bsModal #userModal="bs-modal" [config]="{backdrop: 'static'}"
      tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" aria-label="Close" (click)="addNewUserModal.hide()">
+        <button type="button" class="close" aria-label="Close" (click)="userModal.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">{{ language.getTexts(title) }}</h4>
+        <h4 class="modal-title" *ngIf="formOptions">
+          {{ dictionary.getTexts(formOptions.title) }} {{ formOptions.user.firstName }} {{ formOptions.user.lastName }}
+        </h4>
       </div>
       <div class="modal-body">
-        <user-form [formOptions]="user"></user-form>
+        <user-form [formOptions]="formOptions"></user-form>
       </div>
     </div>
   </div>

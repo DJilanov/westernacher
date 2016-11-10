@@ -20,8 +20,7 @@
      * @res {Object} The res to the front-end
      */
     function returnAllUsers(req, res) {
-        var response = buildResponse(cache.getUsers(), res);
-        res.json(response);
+        buildResponse(cache.getUsers(), res);
     }
     /**
      * @find It searches in the back-end by query
@@ -72,7 +71,8 @@
                 firstName: results[userCounter].first_name,
                 lastName: results[userCounter].last_name,
                 emailAddress: results[userCounter].email_address,
-                dateOfBirth: results[userCounter].date_of_birth
+                dateOfBirth: results[userCounter].date_of_birth,
+                id: results[userCounter]._id
             };
         }
         return response;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class BulgarianDictionary {
-    public language = {
+    public dictionary = {
         "searchFor": "Потърси...",
         "firstName": "Име",
         "lastName": "Фамилия",
@@ -12,6 +12,8 @@ export class BulgarianDictionary {
         "lastNameInput": "Въведете фамилията",
         "emailAddressInput": "Въведете емайл адреса",
         "dateOfBirthInput": "Въведете датата на раждане",
-        "addNewUser": "Добавяне на нов потребител"
+        "addNewUser": "Добавяне на нов потребител",
+        "editUser": "Промянa на потребителя",
+        "deleteBtn": "Изтриване на потребителя"
     }
 }

@@ -7,12 +7,11 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 // Language 
-import { Language } from './language/language.service';
+import { Dictionary } from './language/dictionary.service';
 import { EnglishDictionary } from './language/en.dictionary';
 import { BulgarianDictionary } from './language/bg.dictionary';
 
 // Basic Components
-import { ButtonComponent } from './basic_components/button/button.component';
 import { HeaderComponent } from './basic_components/header/header.component';
 import { UserFormComponent } from './basic_components/user_form/user_form.component';
 
@@ -20,12 +19,14 @@ import { UserFormComponent } from './basic_components/user_form/user_form.compon
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
-import { DetailsComponent } from './components/details/details.component';
 import { UserListComponent } from './components/user_list/user_list.component';
 import { UserModalComponent } from './components/user_modal/user_modal.component';
 
 // Config
 import { Config } from './config';
+
+// Enums
+import { ActionsEnum } from './enums/actions.enum';
 
 // Services
 import { CachingService } from './services/caching.service';
@@ -49,11 +50,9 @@ import { ErrorHandlerService } from './services/error.handler.service';
         AppComponent,
         HomeComponent,
         SearchComponent,
-        DetailsComponent,
         UserListComponent,
         UserModalComponent,
         // Basic components
-        ButtonComponent,
         HeaderComponent,
         UserFormComponent,
     ],
@@ -66,7 +65,8 @@ import { ErrorHandlerService } from './services/error.handler.service';
         // config of the app
         Config,
         // languages
-        Language,
+        Dictionary,
+        ActionsEnum,
         EnglishDictionary,
         BulgarianDictionary,
         // services of the app

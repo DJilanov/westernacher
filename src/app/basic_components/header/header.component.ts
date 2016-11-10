@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Language } from '../../language/language.service';
+import { Dictionary } from '../../language/dictionary.service';
 
 @Component({
     selector: 'custom-header',
@@ -10,10 +10,10 @@ import { Language } from '../../language/language.service';
 export class HeaderComponent {
 
     constructor(
-        private language: Language
+        private dictionary: Dictionary
     ) {};
 
     private changeLanguage() {
-      this.language.changeLanguage();
+      this.dictionary.changeLanguage();
     }
 }

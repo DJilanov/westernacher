@@ -48,6 +48,7 @@
             if(!collection) {
                 return;
             }
+            // return data about the new user
             collection.insertOne(query, function(err, docs) {
                 handleCallback(err,res);
             });

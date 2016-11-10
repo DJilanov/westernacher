@@ -15,8 +15,9 @@ export class ErrorHandlerService {
         this.errorEmitter = new EventEmitter();
     }
 
-    public handleError(err) {
-        // TODO: WHEN THERE IS PROBLEM WITH CONNECTION TO THE BACK-END
+    public handleError(err, options) {
+        // TODO: WHEN THERE IS PROBLEM WITH CONNECTION TO THE BACK-END CHECK IT BY THE ERROR AND THE OPTIONS MUST 
+        //       BE SAVED FOR FUTURE SENDING
         
     }
 

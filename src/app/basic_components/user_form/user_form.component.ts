@@ -1,3 +1,4 @@
+import { ActionsEnum } from '../../enums/actions.enum';
 import { Component, Input, OnInit } from '@angular/core';
 import { Dictionary } from '../../language/dictionary.service';
 import { EventEmiterService } from '../../services/event.emiter.service';
@@ -39,8 +40,12 @@ export class UserFormComponent implements OnInit {
 
     onSubmit(formData, action) {
         event.preventDefault();
+        if((this.formOptions['action'] === this.actionsEnum.update) && (action !== this.actionsEnum.delete)) {
+            action = this.formOptions['action'];
+        }
+        let formObject = Object.assign(formData.value, {'id':this.formOptions['user'].id});
         this.eventEmiterService.emitUpdateUser({
-            'form': formData.value,
+            'form': formObject,
             'options': this.formOptions,
             'id': this.formOptions['user'].id,
             'action': action
@@ -49,6 +54,7 @@ export class UserFormComponent implements OnInit {
 
     constructor(
         private dictionary: Dictionary,
+        private actionsEnum: ActionsEnum,
         private eventEmiterService: EventEmiterService
     ){
         this.eventEmiterService.showUserModal.subscribe(options => this.updateFormData(options));

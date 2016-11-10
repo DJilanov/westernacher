@@ -16,7 +16,12 @@ export class ErrorHandlerService {
     }
 
     public handleError(err) {
+        // TODO: WHEN THERE IS PROBLEM WITH CONNECTION TO THE BACK-END
         
+    }
+
+    public handleInitError(err) {
+        // TODO: WHEN THERE IS PROBLEM WITH INIT
     }
 
     public emitError(data) {

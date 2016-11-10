@@ -26,43 +26,43 @@ export class AppComponent {
         fetcher.getUsers().subscribe(
             // Validate the input by the user model
             users => this.setUsers(users),
-            err => this.errorHandlerService.handleError(err)
+            err => this.errorHandlerService.handleInitError(err)
         );
         this.eventEmiterService.updateUser.subscribe(options => this.updateUser(options));
     };
 
     private updateUser(options) {
-        switch (options.options.action) {
+        switch (options.action) {
             case this.actionsEnum.delete:
                  this.fetcher.deleteUser(options.form, options.id).subscribe(
-                    // Validate the input by the user model
-                    users => this.setUsers(users),
-                    err => this.errorHandlerService.handleError(err)
+                    response => this.checkApiResponse(response),
+                    err => this.errorHandlerService.handleError(err, options)
                 );
                 break;
             case this.actionsEnum.update:
                  this.fetcher.updateUser(options.form, options.id).subscribe(
-                    // Validate the input by the user model
-                    users => this.setUsers(users),
-                    err => this.errorHandlerService.handleError(err)
+                    response => this.checkApiResponse(response),
+                    err => this.errorHandlerService.handleError(err, options)
                 );
                 break;
             case this.actionsEnum.create:
                  this.fetcher.createUser(options.form).subscribe(
-                    // Validate the input by the user model
-                    users => this.setUsers(users),
-                    err => this.errorHandlerService.handleError(err)
+                    response => this.checkApiResponse(response),
+                    err => this.errorHandlerService.handleError(err, options)
                 );
                 break;
             default:
                 throw "Something get wrong and you try to update on a strange way! Debug it!";
         }
-        // debugger;
+    }
+
+    private checkApiResponse(response) {
+        // TODO: SAVE IT AS LOCALSTORAGE FOR OFFLINE USAGE
+        // TODO: IF ERROR OCCURS IN THE ERROR HANDLER SHOW THE OFFLINE MODE
+        // TODO: ALL OF THE TIME THERE MUST BE HEARTHBEAT EVERY 30 SEC. WHEN NET COMES BACK SEND ALL SAVED
     }
 
     private setUsers(users) {
-        // validate the data that is in the format of the interface. 
-        // It will trow error if there is difference so we can easy change it and update it
         this.users = <User[]>users.json();
         this.eventEmiterService.emitFetchedData(this.users);
     }

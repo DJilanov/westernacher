@@ -17,26 +17,40 @@
         return isValid;
     }
 
-    function buildQuery(body) {
+    function buildQuery(id) {
         var query = {
-            "first_name": body.firstName,
-            "last_name": body.lastName,
-            "email_address": body.emailAddress,
-            "date_of_birth": body.dateOfBirth
+            "_id": new ObjectId(id)
         };
         return query;
+    }
+
+    function buildData(body) {
+        var data = {
+            $set: {
+                "first_name": body.firstName,
+                "last_name": body.lastName,
+                "email_address": body.emailAddress,
+                "date_of_birth": body.dateOfBirth
+            }
+        };
+        return data;
     }
 
     function createUser(req, res) {
         var body = req.body;
         // validate the input
         if(!validateInputs(body)) {
-            returnProblem('Wrong input information');
+            returnProblem('Wrong input information', res);
             return;
         }
-        var query = buildQuery(body);
-        mongoose.connection.db.collection('messages', function(err, collection) {
-            collection.insertOne(query, handleCallback);
+        var query = buildData(body);
+        mongoose.connection.db.collection('users', function(err, collection) {
+            if(!collection) {
+                return;
+            }
+            collection.insertOne(query, function(err, docs) {
+                handleCallback(err,res);
+            });
         });
     }
 
@@ -44,33 +58,44 @@
         var body = req.body;
         // validate the input
         if(!validateInputs(body)) {
-            returnProblem('Wrong input information');
+            returnProblem('Wrong input information', res);
             return;
         }
-        var query = buildQuery(body);
-
+        var query = buildQuery(body.id);
+        var update = buildData(body);
+        mongoose.connection.db.collection('users', function(err, collection) {
+            if(!collection) {
+                return;
+            }
+            collection.update(query, update, function(err, docs) {
+                handleCallback(err,res);
+            });
+        });
     }
 
     function deleteUser(req, res) {
-        var body = req.body;
-        // validate the input
-        if(!validateInputs(body)) {
-            returnProblem('Wrong input information');
-            return;
-        }
-        var query = buildQuery(body);
-
+        var id = req.param('id');
+        var query = buildQuery(id);
+        console.log(query);
+        mongoose.connection.db.collection('users', function(err, collection) {
+            if(!collection) {
+                return;
+            }
+            collection.remove(query, function(err, docs) {
+                handleCallback(err,res);
+            });
+        });
     }
 
-    function handleCallback() {
-        if(true) {
-            returnSuccess();
+    function handleCallback(err, res) {
+        if(!err) {
+            returnSuccess(res);
         } else {
-            returnProblem(err);
+            returnProblem(err, res);
         }
     }
 
-    function returnSuccess() {
+    function returnSuccess(res) {
         res.json({
             done: true,
             reason: null
@@ -82,7 +107,7 @@
      * @info There were 2 options: return 4** with error body or return 200 with reason. I chouse 200 becouse there is no problem
      *          with the back-end... there is problem with your call.. 4** must be returned if there is problem with the API
      */
-    function returnProblem(err) {
+    function returnProblem(err, res) {
         res.json({
             done: false,
             reason: err

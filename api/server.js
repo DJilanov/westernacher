@@ -36,7 +36,7 @@ app.all('/*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     // allow all methods
     // TODO: OPTIONS is not implemented to return all options. Do it!
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
     // allow the request for the scripts
     res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
     // we call the real root

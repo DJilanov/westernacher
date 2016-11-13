@@ -25,6 +25,10 @@ export class ErrorHandlerService {
         // TODO: WHEN THERE IS PROBLEM WITH INIT
     }
 
+    public handleHeartBeatError(err) {
+
+    }
+
     public emitError(data) {
         this.errorEmitter.emit(data);
     }

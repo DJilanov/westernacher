@@ -16,6 +16,10 @@ export class FetcherService {
     public getUsers() {
         return this.http.get( Config.usersUrl );
     }
+
+    public heartbeat() {
+        return this.http.get( Config.heartbeatUrl );
+    }
     /**
     * @getUser get specific user
     * @return {Promise} http request

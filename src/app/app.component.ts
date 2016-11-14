@@ -3,6 +3,7 @@ import { FetcherService } from './services/fetcher.service';
 import { CachingService } from './services/caching.service';
 import { User } from './interfaces/user.interface';
 import { ActionsEnum } from './enums/actions.enum';
+import { HeartBeatService } from './services/heart.beat.service';
 import { EventEmiterService } from './services/event.emiter.service';
 import { ErrorHandlerService } from './services/error.handler.service';
 
@@ -20,9 +21,13 @@ export class AppComponent {
         private fetcher: FetcherService,
         private actionsEnum: ActionsEnum,
         private cachingService: CachingService,
+        private heartBeatService: HeartBeatService,
         private eventEmiterService: EventEmiterService,
         private errorHandlerService: ErrorHandlerService
     ) {
+        // we start the heartbeating of the application
+        heartBeatService.setHeartbeat();
+        // we make the init request of the data
         fetcher.getUsers().subscribe(
             // Validate the input by the user model
             users => this.setUsers(users),

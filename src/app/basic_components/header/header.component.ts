@@ -13,7 +13,7 @@ export class HeaderComponent {
         private dictionary: Dictionary
     ) {};
 
-    private changeLanguage() {
+    private changeLanguage():void {
       this.dictionary.changeLanguage();
     }
 }

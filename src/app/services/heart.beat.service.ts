@@ -11,22 +11,48 @@ import { Config } from '../config';
 export class HeartBeatService {
 	// we use any becouse interval is function that typescript thinks is number...
 	private interval:any;
-
+	// holder for the last heart beat successful response
+	private lastSuccess:Date = new Date();
+	// do the app works online
+	private online:boolean = true;
+    /**
+    * @setHeartbeat set the heart beat interval
+    */
 	public setHeartbeat() {
+		// we clear the old interval ( we doesnt need 2 intervals )
+		clearInterval(this.interval);
+		// we set the interval as hearthbeat calls
 		this.interval = setInterval(function() {
 			 this.fetcher.heartbeat().subscribe(
 	            // Validate the input by the user model
-	            users => this.handleHeartbeat(users),
+	            data => this.handleHeartbeat(data),
 	            err => this.errorHandlerService.handleHeartbeatError(err)
 	        );
 		}, Config.hearthBeatIntervalInSeconds * 1000);
 	}
-
+    /**
+    * @stopHeartbeat stops the heart beat interval
+    */
 	public stopHeartbeat() {
 		clearInterval(this.interval);
 	}
+    /**
+    * @handleHeartbeat handle heart beat response
+    */
+	private handleHeartbeat(data) {
+		// TODO: ADD MORE FUNCTIONALLITY
+		this.lastSuccess = new Date();
+		if(!this.online) {
+			this.startOnlineMode();
+		}
+	}
 
-	public handleHeartbeat() {
+	private startOnlineMode() {
+
+		this.online = true;
+	}
+
+	public startOfflineMode() {
 
 	}
 

@@ -26,22 +26,22 @@ export class UserModalComponent {
         "btnText": ''
     };
 
-    @ViewChild('userModal') public userModal;
+    @ViewChild('userModal') private userModal;
 
-    public showUserModal(options):void {
+    private showUserModal(options):void {
         this.userModal.show();
         this.title = options.title;
         this.formOptions = options;
     }
 
-    public hideUserModal():void {
+    private hideUserModal():void {
         this.userModal.hide();
     }
 
     /**
      * @constructor on init
      */
-    public constructor(
+    constructor(
         private dictionary: Dictionary,
         private eventEmiterService: EventEmiterService
     ) {

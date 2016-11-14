@@ -8,7 +8,7 @@ import { Config } from '../config';
  * @CachingService used to cache the data to have offline mode
  */
 export class CachingService {
-    // TODO: cache the users in the back-end
+    // TODO: cache the users in the front-end
 
     constructor() {
 

@@ -19,7 +19,7 @@ export class UserFormComponent implements OnInit {
 
     private ngForm: FormGroup;
 
-    ngOnInit() {
+    private ngOnInit() {
         this.ngForm = new FormGroup({
             "firstName": new FormControl('', [<any>Validators.required, <any>Validators.maxLength(40)]),
             "lastName": new FormControl('', [<any>Validators.required, <any>Validators.maxLength(40)]),
@@ -29,7 +29,7 @@ export class UserFormComponent implements OnInit {
     }
     // when we use the form to update the user we must reinit the formgroup using the options
     // TODO: find a better way
-    updateFormData(options) {
+    private updateFormData(options):void {
         this.ngForm = new FormGroup({
             "firstName": new FormControl(options.user.firstName, [<any>Validators.required, <any>Validators.maxLength(40)]),
             "lastName": new FormControl(options.user.lastName, [<any>Validators.required, <any>Validators.maxLength(40)]),
@@ -38,7 +38,7 @@ export class UserFormComponent implements OnInit {
         });
     }
 
-    onSubmit(formData, action) {
+    private onSubmit(formData, action):void {
         event.preventDefault();
         if((this.formOptions['action'] === this.actionsEnum.update) && (action !== this.actionsEnum.delete)) {
             action = this.formOptions['action'];

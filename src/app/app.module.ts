@@ -31,6 +31,7 @@ import { ActionsEnum } from './enums/actions.enum';
 // Services
 import { CachingService } from './services/caching.service';
 import { FetcherService } from './services/fetcher.service';
+import { HeartBeatService } from './services/heart.beat.service';
 import { EventEmiterService } from './services/event.emiter.service';
 import { ErrorHandlerService } from './services/error.handler.service';
 
@@ -72,6 +73,7 @@ import { ErrorHandlerService } from './services/error.handler.service';
         // services of the app
         FetcherService,
         CachingService,
+        HeartBeatService,
         EventEmiterService,
         ErrorHandlerService
     ]

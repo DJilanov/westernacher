@@ -7,8 +7,16 @@
     var mongoose = require('mongoose');
     var config = require('./config').getConfig();
     var validator = require('./validator');
-    var valueForSearch = null;
+    var cache = null;
     // TODO: USE SCHEMA FOR DATA MODELS!!!
+
+    /**
+     * @setCache set the cache as local variable
+     * @cache {Object} The cache object
+     */
+    function setCache(cacheModule) {
+        cache = cacheModule;
+    }
 
     function validateInputs(body) {
         // we validate the input
@@ -26,12 +34,10 @@
 
     function buildData(body) {
         var data = {
-            $set: {
-                "first_name": body.firstName,
-                "last_name": body.lastName,
-                "email_address": body.emailAddress,
-                "date_of_birth": body.dateOfBirth
-            }
+            "first_name": body.firstName,
+            "last_name": body.lastName,
+            "email_address": body.emailAddress,
+            "date_of_birth": body.dateOfBirth
         };
         return data;
     }
@@ -50,7 +56,14 @@
             }
             // return data about the new user
             collection.insertOne(query, function(err, docs) {
-                handleCallback(err,res);
+                var response = {
+                    id: docs.insertedId.toHexString(),
+                    "firstName": body.firstName,
+                    "lastName": body.lastName,
+                    "emailAddress": body.emailAddress,
+                    "dateOfBirth": body.dateOfBirth
+                };
+                handleCallback(err, res, response, 'create');
             });
         });
     }
@@ -69,13 +82,14 @@
                 return;
             }
             collection.update(query, update, function(err, docs) {
-                handleCallback(err,res);
+                handleCallback(err, res, body, 'update');
             });
         });
     }
 
     function deleteUser(req, res) {
         var id = req.param('id');
+        var response = { id: id };
         var query = buildQuery(id);
         console.log(query);
         mongoose.connection.db.collection('users', function(err, collection) {
@@ -83,23 +97,25 @@
                 return;
             }
             collection.remove(query, function(err, docs) {
-                handleCallback(err,res);
+                handleCallback(err, res, response, 'delete');
             });
         });
     }
 
-    function handleCallback(err, res) {
+    function handleCallback(err, res, response, operation) {
         if(!err) {
-            returnSuccess(res);
+            cache.changeUsers(response, operation);
+            returnSuccess(res, response);
         } else {
             returnProblem(err, res);
         }
     }
 
-    function returnSuccess(res) {
+    function returnSuccess(res, response) {
         res.json({
             done: true,
-            reason: null
+            reason: null,
+            user: response
         });
     }
 
@@ -152,6 +168,7 @@
     }
 
     module.exports = {
+        setCache: setCache,
         connectDb: connectDb,
         createUser: createUser,
         updateUser: updateUser,

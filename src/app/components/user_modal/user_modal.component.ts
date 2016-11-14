@@ -28,12 +28,19 @@ export class UserModalComponent {
 
     @ViewChild('userModal') private userModal;
 
+    /**
+    * @showUserModal used to show the user modal with the data we sended to it
+    * @options {Object} user data
+    */
     private showUserModal(options):void {
         this.userModal.show();
         this.title = options.title;
         this.formOptions = options;
     }
 
+    /**
+    * @hideUserModal used to hide user modal
+    */
     private hideUserModal():void {
         this.userModal.hide();
     }
@@ -45,6 +52,7 @@ export class UserModalComponent {
         private dictionary: Dictionary,
         private eventEmiterService: EventEmiterService
     ) {
+        this.eventEmiterService.hideUserModal.subscribe(options => this.hideUserModal());
         this.eventEmiterService.showUserModal.subscribe(options => this.showUserModal(options));
     }
 }

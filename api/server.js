@@ -15,8 +15,9 @@ var dbUpdator = require('./dbUpdator');
 // TODO: will be used to validate the login form that we are allowed to work with that
 var validator = require('./validator');
 // we connect to the db using the credentials and fetch the db localy
-dbFinder.setCache(cache);
 dbUpdator.connectDb();
+dbFinder.setCache(cache);
+dbUpdator.setCache(cache);
 // this will let us get nv.PORT || 8080;        // set our port
 
 var port = process.env.PORT || 8080; // set our port
@@ -44,6 +45,7 @@ app.all('/*', function(req, res, next) {
 });
 // to check is the API live or its dead
 app.get('/api/heartbeat', function(req, res) {
+    // TODO: IMPLEMENT LOGIC FOR DATA CHANGES SO IT CAN WORK LIKE SOCKETS
     res.json({
         working: true,
     });

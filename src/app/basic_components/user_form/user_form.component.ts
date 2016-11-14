@@ -16,20 +16,15 @@ export class UserFormComponent implements OnInit {
     // we use them as strings becouse FormControl often has issues with the regex parse 
     private dateRegex:string = '([0-9]{4}[-](0[1-9]|1[0-2])[-]([0-2]{1}[0-9]{1}|3[0-1]{1})|([0-2]{1}[0-9]{1}|3[0-1]{1})[-](0[1-9]|1[0-2])[-][0-9]{4})';
     private emailRegex:string = '^[a-zA-Z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$';
-
+    private submited: boolean = false;
     private ngForm: FormGroup;
 
-    private ngOnInit() {
-        this.ngForm = new FormGroup({
-            "firstName": new FormControl('', [<any>Validators.required, <any>Validators.maxLength(40)]),
-            "lastName": new FormControl('', [<any>Validators.required, <any>Validators.maxLength(40)]),
-            "dateOfBirth": new FormControl('', [<any>Validators.required, <any>Validators.pattern(this.dateRegex)]),
-            "emailAddress": new FormControl('', [<any>Validators.required, <any>Validators.pattern(this.emailRegex)])
-        });
-    }
-    // when we use the form to update the user we must reinit the formgroup using the options
-    // TODO: find a better way
+    /**
+    * @updateFormData when we use the form to update the user we must reinit the formgroup using the options
+    * @options {Object} data with options of the form
+    */
     private updateFormData(options):void {
+        // TODO: find a better way
         this.ngForm = new FormGroup({
             "firstName": new FormControl(options.user.firstName, [<any>Validators.required, <any>Validators.maxLength(40)]),
             "lastName": new FormControl(options.user.lastName, [<any>Validators.required, <any>Validators.maxLength(40)]),
@@ -38,8 +33,14 @@ export class UserFormComponent implements OnInit {
         });
     }
 
+    /**
+    * @onSubmit when we use the form to update the user we must reinit the formgroup using the options
+    * @formData {Object} data with options of the form
+    * @action {String} action of the form ( submit, delete , update )
+    */
     private onSubmit(formData, action):void {
         event.preventDefault();
+        this.submited = true;
         if((this.formOptions['action'] === this.actionsEnum.update) && (action !== this.actionsEnum.delete)) {
             action = this.formOptions['action'];
         }
@@ -52,11 +53,28 @@ export class UserFormComponent implements OnInit {
         });
     }
 
+    private enableButtons() {
+        this.submited = false;
+    }
+    
+    /**
+    * @ngOnInit handle the generation of the base validator version
+    */
+    ngOnInit() {
+        this.ngForm = new FormGroup({
+            "firstName": new FormControl('', [<any>Validators.required, <any>Validators.maxLength(40)]),
+            "lastName": new FormControl('', [<any>Validators.required, <any>Validators.maxLength(40)]),
+            "dateOfBirth": new FormControl('', [<any>Validators.required, <any>Validators.pattern(this.dateRegex)]),
+            "emailAddress": new FormControl('', [<any>Validators.required, <any>Validators.pattern(this.emailRegex)])
+        });
+    }
+
     constructor(
         private dictionary: Dictionary,
         private actionsEnum: ActionsEnum,
         private eventEmiterService: EventEmiterService
     ){
+        this.eventEmiterService.hideUserModal.subscribe(options => this.enableButtons());
         this.eventEmiterService.showUserModal.subscribe(options => this.updateFormData(options));
     }
 }

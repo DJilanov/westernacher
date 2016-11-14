@@ -18,8 +18,41 @@
         users = newUsers;
     }
 
+    function changeUsers(user, operation) {
+        user = {
+            "first_name": user.firstName,
+            "last_name": user.lastName,
+            "email_address": user.emailAddress,
+            "date_of_birth": user.dateOfBirth,
+            "id": user.id
+        };
+        switch(operation) {
+            case 'create':
+                users.push(user);
+            break;
+            case 'update':
+                users = users.map(function(el) {
+                    if(user.id === el._id.toString()) {
+                        user._id = el._id;
+                        return user;
+                    }
+                    return el;
+                });
+            break;
+            case 'delete':
+                users = users.filter(function(el) {
+                    return el._id.toString() !== user.id;
+                });
+            break;
+            default:
+                console.log('error occured on caching user: ' + JSON.stringify(user) + ' and operation ' + operation);
+            break;
+        }
+    }
+
     module.exports = {
         getUsers: getUsers,
-        setUsers: setUsers
+        setUsers: setUsers,
+        changeUsers: changeUsers
     };
 }());

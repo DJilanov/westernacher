@@ -1,4 +1,5 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { StatusEnum } from '../../enums/status.enum';
 import { Dictionary } from '../../language/dictionary.service';
 import { CachingService } from '../../services/caching.service';
 import { EventEmiterService } from '../../services/event.emiter.service';
@@ -11,21 +12,48 @@ import { EventEmiterService } from '../../services/event.emiter.service';
 
 export class UserListComponent {
     // used as a single source of truth for the users
-    @Input()
-    users: Array<Object> = [];
+    private users: Array<Object> = [];
 
+    private backendStatus: string = '';
+
+    /**
+    * @updateUsersList used to update on fetch the user list
+    * @users {Array<User>} user list
+    */
+    private updateUsersList(users) {
+        this.users = users;
+    }
+
+    /**
+    * @sortByColumn used to sort the table by column
+    */
     private sortByColumn():void {
-        let dataset = event.target['dataset'];
+        let dataset = event.target['parentElement']['dataset'];
         if(dataset.asc == 'true') {
-            this.users = this.users.sort((a,b)=>b[dataset.sortBy]-a[dataset.sortBy]);
+            this.users = this.users.sort(function (a, b) {
+                if(a[dataset.sortBy].toUpperCase() > b[dataset.sortBy].toUpperCase()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            });
             dataset.asc = 'false';
         } else {
-            this.users = this.users.sort((a,b)=>a[dataset.sortBy]-b[dataset.sortBy]);
+            this.users = this.users.sort(function (a, b) {
+                if(a[dataset.sortBy].toUpperCase() < b[dataset.sortBy].toUpperCase()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            });
             dataset.asc = 'true';
         }
     }
 
-
+    /**
+    * @editUser used to show edit user modal
+    * @user {Object} user options
+    */
     private editUser(user):void {
         this.eventEmiterService.emitShowUserModal({
             'user': {
@@ -41,6 +69,9 @@ export class UserListComponent {
         });
     }
 
+    /**
+    * @addNewUser used to show create user modal
+    */
     private addNewUser():void {
         this.eventEmiterService.emitShowUserModal({
             'user': {
@@ -57,10 +88,26 @@ export class UserListComponent {
     }
 
     /**
+    * @setBackEndStatus used to show the status of the back-end to the user
+    * @status {String} status
+    */
+    private setBackEndStatus(status:string) {
+        this.backendStatus = this.statusEnum[status];
+    }
+
+    /**
      * @constructor on init
      */
     public constructor(
+        private statusEnum: StatusEnum,
         private dictionary: Dictionary,
+        private cachingService: CachingService,
         private eventEmiterService: EventEmiterService
-    ) {}
+    ) {
+        this.backendStatus = statusEnum['false'];
+        this.updateUsersList(cachingService.getUsersList());
+        this.eventEmiterService.dataFetched.subscribe(users => this.updateUsersList(users));
+        this.eventEmiterService.workingOnline.subscribe(users => this.setBackEndStatus('true'));
+        this.eventEmiterService.workingOffline.subscribe(users => this.setBackEndStatus('false'));
+    }
 }

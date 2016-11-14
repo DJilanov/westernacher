@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'home',
@@ -7,8 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 
 export class HomeComponent {
-    @Input()
-    users: Array<Object>;
-
     constructor() {};
 }

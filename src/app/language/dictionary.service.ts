@@ -8,15 +8,23 @@ export class Dictionary {
     // the variables containing the language jsons
     // will contain the default language
     private language: string = ''; 
-    // will return the texts from witch we fill our forms
+    /**
+    * @getTexts will return the text from the current dictionary 
+    * @text {string} searched text 
+    */
     public getTexts(text) {
         return this[this.language].dictionary[text];
     };
-
-    public setLanguage(language) {
+    /**
+    * @setLanguage change the language of the app
+    * @language {string} new language
+    */
+    public setLanguage(language):void {
         this.language = language;
     }
-
+    /**
+    * @nextLanguage returns the next language to show the correct flag
+    */
     public nextLanguage() {
         let index = Config.languages.indexOf(this.language);
         if(index == Config.languages.length - 1) {
@@ -25,8 +33,10 @@ export class Dictionary {
             return Config.languages[index + 1];
         }
     }
-
-    public changeLanguage() {
+    /**
+    * @changeLanguage change the languag with the next one
+    */
+    public changeLanguage():void {
         this.language = this.nextLanguage();
     }
 

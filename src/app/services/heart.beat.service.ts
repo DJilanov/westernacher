@@ -1,5 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { FetcherService } from './fetcher.service';
+import { ErrorHandlerService } from './error.handler.service';
+import { EventEmiterService } from '../services/event.emiter.service';
 
 import { Config } from '../config';
 
@@ -14,49 +16,55 @@ export class HeartBeatService {
 	// holder for the last heart beat successful response
 	private lastSuccess:Date = new Date();
 	// do the app works online
-	private online:boolean = true;
+	public online:boolean = true;
     /**
     * @setHeartbeat set the heart beat interval
     */
-	public setHeartbeat() {
+	public setHeartbeat():void {
 		// we clear the old interval ( we doesnt need 2 intervals )
 		clearInterval(this.interval);
+        var self = this;
 		// we set the interval as hearthbeat calls
-		this.interval = setInterval(function() {
-			 this.fetcher.heartbeat().subscribe(
+		this.interval = setInterval(function(self) {
+			self.fetcher.heartbeat().subscribe(
 	            // Validate the input by the user model
-	            data => this.handleHeartbeat(data),
-	            err => this.errorHandlerService.handleHeartbeatError(err)
+	            data => self.handleHeartbeat(data),
+	            err => self.errorHandlerService.handleHeartBeatError(err)
 	        );
-		}, Config.hearthBeatIntervalInSeconds * 1000);
+		}, Config.hearthBeatIntervalInSeconds * 1000, self);
 	}
     /**
     * @stopHeartbeat stops the heart beat interval
     */
-	public stopHeartbeat() {
+	public stopHeartbeat():void {
 		clearInterval(this.interval);
 	}
     /**
     * @handleHeartbeat handle heart beat response
     */
-	private handleHeartbeat(data) {
+	private handleHeartbeat(data):void {
 		// TODO: ADD MORE FUNCTIONALLITY
+        // TODO: IMPLEMENT LOGIC FOR DATA CHANGES SO IT CAN WORK LIKE SOCKETS
 		this.lastSuccess = new Date();
 		if(!this.online) {
 			this.startOnlineMode();
 		}
 	}
 
-	private startOnlineMode() {
-
+	private startOnlineMode():void {
+        this.eventEmiterService.emitWorkingOnline({});
 		this.online = true;
 	}
 
-	public startOfflineMode() {
-
-	}
+    public startOfflineMode():void {
+        this.online = false;
+    }
 
     constructor(
-    	private fetcher: FetcherService
-    ) {}
+    	private fetcher: FetcherService,
+        private eventEmiterService: EventEmiterService,
+        private errorHandlerService: ErrorHandlerService
+    ) {
+        this.eventEmiterService.workingOffline.subscribe(users => this.startOfflineMode());
+    }
 }

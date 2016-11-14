@@ -1,4 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmiterService } from '../services/event.emiter.service';
+import { CachingService } from './caching.service';
 
 import { Config } from '../config';
 
@@ -11,8 +13,15 @@ export class ErrorHandlerService {
 
     public errorEmitter: EventEmitter<any>;
 
-    constructor() {
+    constructor(
+        private cachingService: CachingService,
+        private eventEmiterService: EventEmiterService
+    ) {
         this.errorEmitter = new EventEmitter();
+    }
+
+    private emitOfflineMode() {
+        this.eventEmiterService.emitWorkingOffline({});
     }
 
     /**
@@ -20,9 +29,11 @@ export class ErrorHandlerService {
     * @err {Object} error object and information
     * @options {Object} data from the back-end about the request
     */
-    public handleError(err, options) {
-        // TODO: WHEN THERE IS PROBLEM WITH CONNECTION TO THE BACK-END CHECK IT BY THE ERROR AND THE OPTIONS MUST 
-        //       BE SAVED FOR FUTURE SENDING
+    public handleError(err, options):void {
+        this.emitOfflineMode();
+        this.cachingService.addRequestToQuery(options);
+        // TODO: ADD ANGULAR 2 TOASTER TO TELL THE USER THAT IS IN THE QUERY
+        this.eventEmiterService.emitHideUserModal();
         
     }
 
@@ -30,7 +41,8 @@ export class ErrorHandlerService {
     * @handleInitError handle the error from the init
     * @err {Object} error object and information
     */
-    public handleInitError(err) {
+    public handleInitError(err):void {
+        this.emitOfflineMode();
         // TODO: WHEN THERE IS PROBLEM WITH INIT
     }
 
@@ -38,7 +50,9 @@ export class ErrorHandlerService {
     * @handleHeartBeatError handle the heart beat error
     * @err {Object} error object and information
     */
-    public handleHeartBeatError(err) {
+    public handleHeartBeatError(err):void {
+        this.emitOfflineMode();
+        // TODO: Start saving everything into a query
 
     }
 
@@ -46,7 +60,7 @@ export class ErrorHandlerService {
     * @emitError get specific user
     * @err {Object} error object and information
     */
-    public emitError(data) {
+    public emitError(data):void {
         this.errorEmitter.emit(data);
     }
 }

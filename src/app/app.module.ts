@@ -5,6 +5,7 @@ import { Ng2Webstorage } from 'ng2-webstorage';
 import { BrowserModule }  from '@angular/platform-browser';
 import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
 
 // Language 
 import { Dictionary } from './language/dictionary.service';
@@ -26,6 +27,7 @@ import { UserModalComponent } from './components/user_modal/user_modal.component
 import { Config } from './config';
 
 // Enums
+import { StatusEnum } from './enums/status.enum';
 import { ActionsEnum } from './enums/actions.enum';
 
 // Services
@@ -34,7 +36,11 @@ import { FetcherService } from './services/fetcher.service';
 import { HeartBeatService } from './services/heart.beat.service';
 import { EventEmiterService } from './services/event.emiter.service';
 import { ErrorHandlerService } from './services/error.handler.service';
-
+// Create config options (see ILocalStorageServiceConfigOptions) for deets:
+let localStorageServiceConfig = {
+    prefix: 'westernacher',
+    storageType: 'localStorage'
+};
 @NgModule({
     // Modules & Libs
     imports: [
@@ -67,6 +73,7 @@ import { ErrorHandlerService } from './services/error.handler.service';
         Config,
         // languages
         Dictionary,
+        StatusEnum,
         ActionsEnum,
         EnglishDictionary,
         BulgarianDictionary,
@@ -75,7 +82,11 @@ import { ErrorHandlerService } from './services/error.handler.service';
         CachingService,
         HeartBeatService,
         EventEmiterService,
-        ErrorHandlerService
+        ErrorHandlerService,
+        LocalStorageService,
+        {
+            provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig
+        }
     ]
 })
 

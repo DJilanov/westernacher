@@ -3,20 +3,20 @@
   <!-- Integrate translation -->
   <thead>
     <tr (click)="sortByColumn();">
-      <td data-sort-by="firstName" data-asc="false">
-        {{ dictionary.getTexts('firstName') }}
+      <td data-sort-by="firstName" data-asc="false" class="col-xs-3">
+        <span class="column-header">{{ dictionary.getTexts('firstName') }}</span>
         <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
-      <td data-sort-by="lastName" data-asc="false">
-        {{ dictionary.getTexts('lastName') }}
+      <td data-sort-by="lastName" data-asc="false" class="col-xs-3">
+        <span class="column-header">{{ dictionary.getTexts('lastName') }}</span>
         <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
-      <td data-sort-by="emailAddress" data-asc="false">
-        {{ dictionary.getTexts('emailAddress') }}
+      <td data-sort-by="emailAddress" data-asc="false" class="col-md-3">
+        <span class="column-header">{{ dictionary.getTexts('emailAddress') }}</span>
         <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
-      <td data-sort-by="dateOfBirth" data-asc="false">
-        {{ dictionary.getTexts('dateOfBirth') }}
+      <td data-sort-by="dateOfBirth" data-asc="false" class="col-md-3">
+        <span class="column-header">{{ dictionary.getTexts('dateOfBirth') }}</span>
         <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
       </td>
     </tr>
@@ -37,7 +37,7 @@
   <tfoot>
     <tr>
       <td colspan="4">
-        status of the information
+        Back-end: {{ backendStatus }}
       </td>
     </tr>
   </tfoot>

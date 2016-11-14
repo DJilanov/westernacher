@@ -44,7 +44,7 @@
      <div class="col-xs-12">
         <button 
           *ngIf="formOptions"
-          [disabled]="!ngForm.valid"
+          [disabled]="!ngForm.valid || submited"
           [class.col-md-6]="formOptions.action == 'update'"
           class="btn btn-primary col-xs-12">
           {{ dictionary.getTexts(formOptions.btnText) }}
@@ -52,6 +52,7 @@
         <button 
           *ngIf="formOptions.action == 'update'"
           (click)="onSubmit(ngForm, 'delete')"
+          [disabled]="submited"
           class="btn btn-danger col-md-6 col-xs-12">
             {{ dictionary.getTexts('deleteBtn') }}
         </button>

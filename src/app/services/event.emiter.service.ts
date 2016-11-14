@@ -12,38 +12,57 @@ export class EventEmiterService {
     public updateUser: EventEmitter<any>;
     public dataFetched: EventEmitter<any>;
     public showUserModal: EventEmitter<any>;
+    public hideUserModal: EventEmitter<any>;
     public workingOnline: EventEmitter<any>;
     public workingOffline: EventEmitter<any>;
+    public userListUpdates: EventEmitter<any>;
 
     constructor() {
         this.updateUser = new EventEmitter();
         this.dataFetched = new EventEmitter();
         this.showUserModal = new EventEmitter();
+        this.hideUserModal = new EventEmitter();
         this.workingOnline = new EventEmitter();
         this.workingOffline = new EventEmitter();
+        this.userListUpdates = new EventEmitter();
     }
 
     /**
     * @emitUpdateUser emit with information about updated user
     * @data {Object} data to emit
     */
-    public emitUpdateUser(data) {
+    public emitUpdateUser(data):void {
         this.updateUser.emit(data);
+    }
+
+    /**
+    * @emitUserListUpdates emit with information about updated userlist
+    * @data {Object} data to emit
+    */
+    public emitUserListUpdates(data):void {
+        this.userListUpdates.emit(data);
     }
 
     /**
     * @emitFetchedData emit with information about fetched user data
     * @data {Object} data to emit
     */
-    public emitFetchedData(data) {
+    public emitFetchedData(data):void {
         this.dataFetched.emit(data);
+    }
+
+    /**
+    * @hideUserModal emit to show the user modal
+    */
+    public emitHideUserModal():void {
+        this.hideUserModal.emit();
     }
 
     /**
     * @emitShowUserModal emit with information about the modal that we have to show
     * @data {Object} data to emit
     */
-    public emitShowUserModal(data) {
+    public emitShowUserModal(data):void {
         this.showUserModal.emit(data);
     }
 
@@ -51,16 +70,15 @@ export class EventEmiterService {
     * @emitWorkingOnline emit that server become online
     * @data {Object} data to emit
     */
-    public emitWorkingOnline(data) {
-
+    public emitWorkingOnline(data):void {
+        this.workingOnline.emit(data);
     }
 
     /**
-    * @emitShowUserModal emit that server become offline
+    * @emitWorkingOffline emit that server become offline
     * @data {Object} data to emit
     */
-    public emitWorkingOffline(data) {
-        
+    public emitWorkingOffline(data):void {
+        this.workingOffline.emit(data);
     }
-}
 }

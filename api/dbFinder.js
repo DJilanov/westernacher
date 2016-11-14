@@ -6,6 +6,7 @@
     var ObjectId = require('mongodb').ObjectID;
     var mongoose = require('mongoose');
     var config = require('./config').getConfig();
+    var cache = null;
 
     /**
      * @setCache set the cache as local variable

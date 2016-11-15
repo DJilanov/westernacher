@@ -1,4 +1,4 @@
-import { Component, Inject, EventEmitter } from '@angular/core';
+import { Component, Inject, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { FetcherService } from './services/fetcher.service';
 import { CachingService } from './services/caching.service';
 import { User } from './interfaces/user.interface';
@@ -13,7 +13,8 @@ import { ToasterService } from 'angular2-toaster/angular2-toaster';
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styles: [ './app.component.css', require('./sass/style.scss') ],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent {

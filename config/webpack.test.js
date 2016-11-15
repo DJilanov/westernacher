@@ -151,6 +151,11 @@ module.exports = function (options) {
           exclude: [helpers.root('src/index.html')]
         },
 
+        {
+            test: /\.scss$/,
+            loaders: ['raw-loader', 'sass-loader'] // sass-loader not scss-loader
+        },
+
         /**
          * Instruments JS files with Istanbul for subsequent code coverage reporting.
          * Instrument only testing sources.

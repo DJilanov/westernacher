@@ -50,4 +50,5 @@
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 // Bootstrap gluphs
 @import "./bootstrap-glyps";
+// Main component css ( we load there the sass for the app )
 @import "../app.component";

@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">60.53% </span>
+        <span class="strong">73.08% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>23/38</span>
+        <span class='fraction'>19/26</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">62.07% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>18/29</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">27.27% </span>
+        <span class="strong">22.22% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/11</span>
+        <span class='fraction'>2/9</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">57.58% </span>
+        <span class="strong">73.08% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>19/33</span>
+        <span class='fraction'>19/26</span>
       </div>
     </div>
   </div>
@@ -131,23 +131,14 @@
 86</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -204,6 +195,15 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,72 +215,72 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable, EventEmitter } from '@angular/core';
 &nbsp;
-import { Config } from '../config';<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
-@Injectable()<span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
-<span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ></span></span>
+import { Config } from '../config';
+&nbsp;
+@Injectable()
+&nbsp;
 /**
  * @DriverService used on all connections to the back-end for the drivers
- */<span class="missing-if-branch" title="else path not taken" >E</span>
+ */
 export class EventEmiterService {
 &nbsp;
     public updateUser: EventEmitter&lt;any&gt;;
-    public dataFetched: EventEmitt<span class="fstat-no" title="function not covered" >er&lt;any&gt;;</span>
-    publ<span class="cstat-no" title="statement not covered" >ic showUserModal: EventEmitter&lt;any&gt;;</span>
-    publ<span class="cstat-no" title="statement not covered" >ic hideUserModal: EventEmitter&lt;any&gt;;</span>
-    publ<span class="cstat-no" title="statement not covered" >ic workingOnline: EventEmitter&lt;any&gt;;</span>
-    publ<span class="cstat-no" title="statement not covered" >ic workingOffline: EventEmitter&lt;any&gt;;</span>
-    publ<span class="cstat-no" title="statement not covered" >ic userListUpdates: EventEmitter&lt;any&gt;;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-    /**<span class="cstat-no" title="statement not covered" ></span>
+    public dataFetched: EventEmitter&lt;any&gt;;
+    public showUserModal: EventEmitter&lt;any&gt;;
+    public hideUserModal: EventEmitter&lt;any&gt;;
+    public workingOnline: EventEmitter&lt;any&gt;;
+    public workingOffline: EventEmitter&lt;any&gt;;<span class="fstat-no" title="function not covered" ></span>
+    publ<span class="cstat-no" title="statement not covered" >ic userListUpdates: EventEmi</span>tter&lt;any&gt;;
+&nbsp;
+    /**
     * @emitUpdateUser emit with information about updated user
     * @data {Object} data to emit
     */
-    public emitUpdateUser(data):void {
-        this.updateUser.emit(data);
-    }<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
+    public emitUpdateUser(data):void {<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        this.updateUser.emit(data);</span>
+    }
+&nbsp;
     /**
     * @emitUserListUpdates emit with information about updated userlist
     * @data {Object} data to emit
-    */
-    public emitUserListUpdates(data):void {
-        this.userListUpdates.emit(data);<span class="fstat-no" title="function not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-    /**
-    * @emitFetchedData emit with information about fetched user data
-    * @data {Object} data to emit
-    */
-    public emitFetchedData(data):void {<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        this.dataFetched.emit(data);</span>
+    */<span class="fstat-no" title="function not covered" ></span>
+    publ<span class="cstat-no" title="statement not covered" >ic emitUserListUpdates(data):</span>void {
+        this.userListUpdates.emit(data);
     }
 &nbsp;
     /**
-    * @hideUserModal emit to show the user modal
-    */<span class="fstat-no" title="function not covered" ></span>
-    publ<span class="cstat-no" title="statement not covered" >ic emitHideUserModal():void</span> {
+    * @emitFetchedData emit with information about fetched user d<span class="fstat-no" title="function not covered" >ata</span>
+    * @d<span class="cstat-no" title="statement not covered" >ata {Object} data to emit</span>
+    */
+    public emitFetchedData(data):void {
+        this.dataFetched.emit(data);
+    }
+&nbsp;
+    /**<span class="fstat-no" title="function not covered" ></span>
+    * @h<span class="cstat-no" title="statement not covered" >ideUserModal emit to show the u</span>ser modal
+    */
+    public emitHideUserModal():void {
         this.hideUserModal.emit();
     }
 &nbsp;
-    /**
-    * @emitShowUserModal emit with information about the modal that we have to show
-    * @data {Object} data to emit<span class="fstat-no" title="function not covered" ></span>
-    */<span class="cstat-no" title="statement not covered" ></span>
+    /**<span class="fstat-no" title="function not covered" ></span>
+    * @e<span class="cstat-no" title="statement not covered" >mitShowUserModal emit with info</span>rmation about the modal that we have to show
+    * @data {Object} data to emit
+    */
     public emitShowUserModal(data):void {
         this.showUserModal.emit(data);
     }
-&nbsp;
-    /**
-    * @emitWorkingOnline emit that server become online<span class="fstat-no" title="function not covered" ></span>
-    * @d<span class="cstat-no" title="statement not covered" >ata {Object} data to emit</span>
+<span class="fstat-no" title="function not covered" ></span>
+    /**<span class="cstat-no" title="statement not covered" ></span>
+    * @emitWorkingOnline emit that server become online
+    * @data {Object} data to emit
     */
     public emitWorkingOnline(data):void {
         this.workingOnline.emit(data);
     }
 &nbsp;
-    /**<span class="fstat-no" title="function not covered" ></span>
-    * @e<span class="cstat-no" title="statement not covered" >mitWorkingOffline emit that serv</span>er become offline
+    /**
+    * @emitWorkingOffline emit that server become offline
     * @data {Object} data to emit
     */
     public emitWorkingOffline(data):void {
@@ -304,7 +304,7 @@ export class EventEmiterService {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Nov 15 2016 18:45:58 GMT+0200 (EET)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Nov 15 2016 21:07:17 GMT+0200 (EET)
 </div>
 </div>
 <script src="../prettify.js"></script>

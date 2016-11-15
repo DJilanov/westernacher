@@ -1,54 +1,42 @@
 import {
   inject,
-  TestBed
-} from '@angular/core/testing';
+  TestBed,
+  ComponentFixture
+} from "@angular/core/testing";
 
 // Load the implementations that should be tested
-import { CachingService } from '../src/app/services/caching.service';
+import { CachingService } from "../src/app/services/caching.service";
+import { EventEmiterService } from '../src/app/services/event.emiter.service';
+import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
+// user model we test
+let user = {
+    id: "id",
+    lastName: "lastName",
+    firstName: "firstName",
+    dateOfBirth: "2016-11-03",
+    emailAddress: "email"
+};
+// the user list we test
+let userList = [user];
+// the parameters we send to the function
+let parameters = {
+  user: user
+};
+let service: CachingService;
+let fixture: ComponentFixture<CachingService>;
 
-describe('Calculator', function() {
+describe('CachingService', () => {
+  let service: CachingService;
 
-  // inject the HTML fixture for the tests
-  beforeEach(function() {
-    var fixture = '<div id="fixture"><input id="x" type="text">' + 
-      '<input id="y" type="text">' + 
-      '<input id="add" type="button" value="Add Numbers">' +
-      'Result: <span id="result" /></div>';
-
-    document.body.insertAdjacentHTML(
-      'afterbegin', 
-      fixture);
+  beforeEach(() => { 
+    service = new CachingService(
+      new EventEmiterService(), 
+      new LocalStorageService(LOCAL_STORAGE_SERVICE_CONFIG)
+    ) 
   });
 
-  // remove the html fixture from the DOM
-  afterEach(function() {
-    document.body.removeChild(document.getElementById('fixture'));
-  });
-
-  // call the init function of calculator to register DOM elements
-  beforeEach(function() {
-    window.calculator.init();
-  });
-
-  it('should return 3 for 1 + 2', function() {
-    document.getElementById('x').value = 1;
-    document.getElementById('y').value = 2;
-    document.getElementById('add').click();
-    expect(document.getElementById('result').innerHTML).toBe('3');
-  });
-
-  it('should calculate zero for invalid x value', function() {
-    document.getElementById('x').value = 'hello';
-    document.getElementById('y').value = 2;
-    document.getElementById('add').click();
-    expect(document.getElementById('result').innerHTML).toBe('0');
-  });
-
-  it('should calculate zero for invalid y value', function() {
-    document.getElementById('x').value = 1;
-    document.getElementById('y').value = 'goodbye';
-    document.getElementById('add').click();
-    expect(document.getElementById('result').innerHTML).toBe('0');
+  it('#getUserList on empty must return undefined', () => {
+    expect(service.getUsersList()).toBe(null);
   });
 
 });

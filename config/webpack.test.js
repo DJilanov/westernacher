@@ -65,18 +65,6 @@ module.exports = function (options) {
       rules: [
 
         /**
-         * Tslint loader support for *.ts files
-         *
-         * See: https://github.com/wbuchwalter/tslint-loader
-         */
-        {
-          enforce: 'pre',
-          test: /\.ts$/,
-          loader: 'tslint-loader',
-          exclude: [helpers.root('node_modules')]
-        },
-
-        /**
          * Source map loader support for *.js files
          * Extracts SourceMaps for source files that as added as sourceMappingURL comment.
          *
@@ -84,7 +72,7 @@ module.exports = function (options) {
          */
         {
           enforce: 'pre',
-          test: /\.js$/,
+          test: /\.ts$/,
           loader: 'source-map-loader',
           exclude: [
             // these packages have problems with their sourcemaps
@@ -224,18 +212,6 @@ module.exports = function (options) {
       new LoaderOptionsPlugin({
         debug: true,
         options: {
-
-          /**
-           * Static analysis linter for TypeScript advanced options configuration
-           * Description: An extensible linter for the TypeScript language.
-           *
-           * See: https://github.com/wbuchwalter/tslint-loader
-           */
-          tslint: {
-            emitErrors: false,
-            failOnHint: false,
-            resourcePath: 'src'
-          },
 
         }
       }),

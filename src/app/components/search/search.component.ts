@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Dictionary } from '../../language/dictionary.service';
+import { EventEmiterService } from '../../services/event.emiter.service';
 
 @Component({
     selector: 'search',
@@ -9,31 +10,58 @@ import { Dictionary } from '../../language/dictionary.service';
 
 export class SearchComponent {
     
-    @Input()
-    users: Array<Object>;
-
+    private users = [];
     private searchQuery:string = '';
-    // add typeahed search
+
+    /**
+    * @addTypeaheadField used to activate typeahead and search into our users
+    */
     private addTypeaheadField() {
-    //   let params = '';
-    //   for(var productCounter = 0; productCounter < this.products.length; productCounter++) {
-    //     if(this.products[productCounter]['params']) {
-    //       params = this.products[productCounter]['params'][this.language['language']].toString();
-    //     } else {
-    //       params = '';
-    //     }
-    //     this.products[productCounter]['typeahed'] = this.products[productCounter]['title'][this.language['language']] + ' ' + 
-    //                                                 this.products[productCounter]['more_info'][this.language['language']] + ' ' +
-    //                                                 this.products[productCounter]['description'][this.language['language']] + ' ' +
-    //                                                 this.products[productCounter]['link'] + ' ' +
-    //                                                 this.products[productCounter]['make'] + ' ' + params;
-    //   }
+      let params = '';
+      for(let userCounter = 0; userCounter < this.users.length; userCounter++) {
+        this.users[userCounter]['typeahed'] = this.users[userCounter]['firstName'] + ' ' + 
+                                                this.users[userCounter]['lastName'] + ' ' + 
+                                                this.users[userCounter]['emailAddress'] + ' ' + 
+                                                this.users[userCounter]['dateOfBirth'] + ' ' + 
+                                                this.users[userCounter]['id'];
+      }
+    }
+
+    /**
+    * @onUserSelect event handler for when we select user from the typeahead
+    * @users <User> selected user
+    */
+    private onUserSelect(user) {
+        this.eventEmiterService.emitShowUserModal({
+            'user': {
+                'firstName': user.item.firstName,
+                'lastName': user.item.lastName,
+                'emailAddress': user.item.emailAddress,
+                'dateOfBirth': user.item.dateOfBirth,
+                'id': user.item.id
+            },
+            'action': 'update',
+            'title':'editUser', 
+            "btnText": "editUser"
+        });
+        // we empty the search becouse it will look better
+        this.searchQuery = '';
+    }
+
+    /**
+    * @updateUsersList used to update user list when we fetch the users from the back-end
+    * @users <User[]> users array 
+    */
+    private updateUsersList(users) {
+        this.users = users;
+        this.addTypeaheadField();
     }
     
 
     constructor(
-        private dictionary: Dictionary
+        private dictionary: Dictionary,
+        private eventEmiterService: EventEmiterService
     ) {
-      this.addTypeaheadField();
+        this.eventEmiterService.dataFetched.subscribe(users => this.updateUsersList(users));
     };
 }

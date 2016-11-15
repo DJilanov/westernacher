@@ -23,7 +23,7 @@
     "@angular/router": "3.0.0",
     "@angular/upgrade": "2.1.2",
     "angular-2-local-storage": "0.0.22",
-    "angular2-toaster": "^1.0.2",
+    "angular2-toaster": "1.0.2",
     "bootstrap-sass": "3.3.7",
     "core-js": "2.4.1",
     "ng2-bootstrap": "1.1.16",

@@ -1,15 +1,15 @@
 <input 
   [(ngModel)]="searchQuery"
-  [typeahead]="products"
+  [typeahead]="users"
   [typeaheadItemTemplate]="customItemTemplate"
   [typeaheadOptionField]="'typeahed'"  
   [typeaheadOptionsLimit]="7"
-  (typeaheadOnSelect)="onProductSelect($event)"
+  (typeaheadOnSelect)="onUserSelect($event)"
   class="form-control"
   placeholder="{{dictionary.getTexts('searchFor')}}">
 
 <template #customItemTemplate let-model="item" let-index="index">
   <h5>
-    <span>{{model.title[dictionary.language]}}</span>
+    <span>{{model.firstName}} {{model.lastName}}</span>
   </h5>
 </template>

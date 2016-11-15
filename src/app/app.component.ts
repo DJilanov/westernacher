@@ -13,7 +13,7 @@ import { ToasterService } from 'angular2-toaster/angular2-toaster';
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
-    styles: [ './app.component.css', require('./sass/style.scss') ],
+    styles: [ require('./sass/style.scss') ],
     encapsulation: ViewEncapsulation.None
 })
 

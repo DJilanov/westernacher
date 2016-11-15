@@ -13,11 +13,17 @@
     }
     /**
      * @setUsers it sets users to the cache
+     * @newUsers <User[]> the new users array
      */
     function setUsers(newUsers) {
         users = newUsers;
     }
 
+    /**
+    * @changeUsers it controll how the user must be saved to the cache
+    * @users <User> selected user
+    * @operation <string> selected operation
+    */
     function changeUsers(user, operation) {
         user = {
             "first_name": user.firstName,

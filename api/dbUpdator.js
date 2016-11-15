@@ -8,16 +8,19 @@
     var config = require('./config').getConfig();
     var validator = require('./validator');
     var cache = null;
-    // TODO: USE SCHEMA FOR DATA MODELS!!!
 
     /**
      * @setCache set the cache as local variable
-     * @cache {Object} The cache object
+     * @cacheModule {Object} The cache module
      */
     function setCache(cacheModule) {
         cache = cacheModule;
     }
 
+    /**
+     * @validateInputs validate all of the inputs that are sended
+     * @body {Object} The form data
+     */
     function validateInputs(body) {
         // we validate the input
         var isValid = validator.validateString(body.firstName) && validator.validateString(body.lastName)
@@ -25,6 +28,10 @@
         return isValid;
     }
 
+    /**
+     * @buildQuery build the search by id query
+     * @id {String} The id of the sended user
+     */
     function buildQuery(id) {
         var query = {
             "_id": new ObjectId(id)
@@ -32,6 +39,11 @@
         return query;
     }
 
+    /**
+     * @buildData build the data in the way the db is structure
+     * @body {Object} The form data
+     * @TODO: Must be splited to different module for a bigger app architecture
+     */
     function buildData(body) {
         var data = {
             "first_name": body.firstName,
@@ -42,6 +54,11 @@
         return data;
     }
 
+    /**
+     * @createUser creates new user and send it to the db
+     * @req {Object} The query from the front-end
+     * @res {Object} The res to the front-end
+     */
     function createUser(req, res) {
         var body = req.body;
         // validate the input
@@ -68,6 +85,11 @@
         });
     }
 
+    /**
+     * @updateUser updates user and send it to the db
+     * @req {Object} The query from the front-end
+     * @res {Object} The res to the front-end
+     */
     function updateUser(req, res) {
         var body = req.body;
         // validate the input
@@ -87,6 +109,11 @@
         });
     }
 
+    /**
+     * @deleteUser deletes user and send it to the db
+     * @req {Object} The query from the front-end
+     * @res {Object} The res to the front-end
+     */
     function deleteUser(req, res) {
         var id = req.param('id');
         var response = { id: id };
@@ -102,6 +129,13 @@
         });
     }
 
+    /**
+     * @handleCallback creates new user and send it to the db
+     * @err {Object} Error object from the database
+     * @res {Object} The res to the front-end
+     * @response {Object} The response from the database
+     * @operation {Object} Operation we did to the database
+     */
     function handleCallback(err, res, response, operation) {
         if(!err) {
             cache.changeUsers(response, operation);
@@ -111,6 +145,11 @@
         }
     }
 
+    /**
+     * @returnSuccess returns success data to the front-end
+     * @res {Object} The res to the front-end
+     * @response {Object} The response from the database
+     */
     function returnSuccess(res, response) {
         res.json({
             done: true,
@@ -121,6 +160,8 @@
 
     /**
      * @returnProblem Returns the error to the front-end ( when delete non existing user or there is some problem )
+     * @err {Object} Error object from the database
+     * @res {Object} The res to the front-end
      * @info There were 2 options: return 4** with error body or return 200 with reason. I chouse 200 becouse there is no problem
      *          with the back-end... there is problem with your call.. 4** must be returned if there is problem with the API
      */

@@ -7,7 +7,10 @@
         dbUser: 'admin',
         dbPassword: '12321'
     };
-    // exporting function of the config object
+
+    /**
+    * @getConfig exporting function of the config object
+    */
     function getConfig() {
         return config;
     }

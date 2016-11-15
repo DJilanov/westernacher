@@ -11,7 +11,7 @@
     "request": "^2.72.0"
   },
   "engines": {
-    "node": "5.10.0"
+    "node": "7.1.0"
   },
   "author": "Dimitar Jilanov",
   "license": "MIT"

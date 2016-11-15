@@ -12,14 +12,14 @@ export class Dictionary {
     * @getTexts will return the text from the current dictionary 
     * @text {string} searched text 
     */
-    public getTexts(text) {
+    public getTexts(text:string) {
         return this[this.language].dictionary[text];
     };
     /**
     * @setLanguage change the language of the app
     * @language {string} new language
     */
-    public setLanguage(language):void {
+    public setLanguage(language:string):void {
         this.language = language;
     }
     /**

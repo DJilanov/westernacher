@@ -5,6 +5,7 @@ import { Ng2Webstorage } from 'ng2-webstorage';
 import { BrowserModule }  from '@angular/platform-browser';
 import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToasterModule, ToasterService } from 'angular2-toaster/angular2-toaster';
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
 
 // Language 
@@ -48,6 +49,7 @@ let localStorageServiceConfig = {
         FormsModule,
         BrowserModule,
         Ng2Webstorage,
+        ToasterModule,
         Ng2BootstrapModule,
         ReactiveFormsModule
     ],
@@ -80,6 +82,7 @@ let localStorageServiceConfig = {
         // services of the app
         FetcherService,
         CachingService,
+        ToasterService,
         HeartBeatService,
         EventEmiterService,
         ErrorHandlerService,

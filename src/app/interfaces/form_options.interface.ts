@@ -1,11 +1,11 @@
 export interface FormOptions {
-    'user': {
-        'firstName': '',
-        'lastName': '',
-        'emailAddress': '',
-        'dateOfBirth': ''
+    user: {
+        'firstName': string,
+        'lastName': string,
+        'emailAddress': string,
+        'dateOfBirth': string
     },
-    'title': string, 
-    'action': string,
-    'btnText': string
+    title: string, 
+    action: string,
+    btnText: string
 }

@@ -38,7 +38,7 @@ export class UserFormComponent implements OnInit {
     * @formData {Object} data with options of the form
     * @action {String} action of the form ( submit, delete , update )
     */
-    private onSubmit(formData, action):void {
+    private onSubmit(formData, action:string):void {
         event.preventDefault();
         this.submited = true;
         if((this.formOptions['action'] === this.actionsEnum.update) && (action !== this.actionsEnum.delete)) {
@@ -53,14 +53,17 @@ export class UserFormComponent implements OnInit {
         });
     }
 
-    private enableButtons() {
+    /**
+    * @enableButtons when the callback from the server is recieved or we close the modal we enable the buttons of the modal
+    */
+    private enableButtons():void {
         this.submited = false;
     }
     
     /**
     * @ngOnInit handle the generation of the base validator version
     */
-    ngOnInit() {
+    ngOnInit():void {
         this.ngForm = new FormGroup({
             "firstName": new FormControl('', [<any>Validators.required, <any>Validators.maxLength(40)]),
             "lastName": new FormControl('', [<any>Validators.required, <any>Validators.maxLength(40)]),

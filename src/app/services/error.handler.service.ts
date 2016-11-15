@@ -1,6 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { EventEmiterService } from '../services/event.emiter.service';
 import { CachingService } from './caching.service';
+import { Dictionary } from '../language/dictionary.service';
+import { EventEmiterService } from '../services/event.emiter.service';
+import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
 import { Config } from '../config';
 
@@ -13,14 +15,16 @@ export class ErrorHandlerService {
 
     public errorEmitter: EventEmitter<any>;
 
-    constructor(
-        private cachingService: CachingService,
-        private eventEmiterService: EventEmiterService
-    ) {
-        this.errorEmitter = new EventEmitter();
-    }
-
+    /**
+    * @emitOfflineMode emits entering offline mode to the app
+    */
     private emitOfflineMode() {
+        this.toasterService.pop({
+            type: 'error',
+            title: this.dictionary.getTexts('error'),
+            body: this.dictionary.getTexts('offlineMode'),
+            showCloseButton: true
+        });
         this.eventEmiterService.emitWorkingOffline({});
     }
 
@@ -43,7 +47,6 @@ export class ErrorHandlerService {
     */
     public handleInitError(err):void {
         this.emitOfflineMode();
-        // TODO: WHEN THERE IS PROBLEM WITH INIT
     }
 
     /**
@@ -62,5 +65,14 @@ export class ErrorHandlerService {
     */
     public emitError(data):void {
         this.errorEmitter.emit(data);
+    }
+
+    constructor(
+        private dictionary: Dictionary,
+        private cachingService: CachingService,
+        private toasterService: ToasterService,
+        private eventEmiterService: EventEmiterService
+    ) {
+        this.errorEmitter = new EventEmitter();
     }
 }

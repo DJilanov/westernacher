@@ -1,7 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { FetcherService } from './fetcher.service';
+import { Dictionary } from '../language/dictionary.service';
 import { ErrorHandlerService } from './error.handler.service';
 import { EventEmiterService } from '../services/event.emiter.service';
+import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
 import { Config } from '../config';
 
@@ -23,7 +25,7 @@ export class HeartBeatService {
 	public setHeartbeat():void {
 		// we clear the old interval ( we doesnt need 2 intervals )
 		clearInterval(this.interval);
-        var self = this;
+        let self = this;
 		// we set the interval as hearthbeat calls
 		this.interval = setInterval(function(self) {
 			self.fetcher.heartbeat().subscribe(
@@ -44,7 +46,7 @@ export class HeartBeatService {
     */
 	private handleHeartbeat(data):void {
 		// TODO: ADD MORE FUNCTIONALLITY
-        // TODO: IMPLEMENT LOGIC FOR DATA CHANGES SO IT CAN WORK LIKE SOCKETS
+        // TODO: IMPLEMENT LOGIC FOR DATA CHANGES SO IT CAN WORK LIKE SOCKETS AND CHECK THE QUERY FOR POTENTIAL DOUBLE CHANGE OF USER
 		this.lastSuccess = new Date();
 		if(!this.online) {
 			this.startOnlineMode();
@@ -54,6 +56,12 @@ export class HeartBeatService {
 	private startOnlineMode():void {
         this.eventEmiterService.emitWorkingOnline({});
 		this.online = true;
+        this.toasterService.pop({
+            type: 'success',
+            title: this.dictionary.getTexts('success'),
+            body: this.dictionary.getTexts('onlineMode'),
+            showCloseButton: true
+        });
 	}
 
     public startOfflineMode():void {
@@ -61,7 +69,9 @@ export class HeartBeatService {
     }
 
     constructor(
+        private dictionary: Dictionary,
     	private fetcher: FetcherService,
+        private toasterService: ToasterService,
         private eventEmiterService: EventEmiterService,
         private errorHandlerService: ErrorHandlerService
     ) {

@@ -24,7 +24,7 @@
             "last_name": user.lastName,
             "email_address": user.emailAddress,
             "date_of_birth": user.dateOfBirth,
-            "id": user.id
+            "_id": user.id
         };
         switch(operation) {
             case 'create':
@@ -32,7 +32,7 @@
             break;
             case 'update':
                 users = users.map(function(el) {
-                    if(user.id === el._id.toString()) {
+                    if(user._id === el._id.toString()) {
                         user._id = el._id;
                         return user;
                     }
@@ -41,7 +41,7 @@
             break;
             case 'delete':
                 users = users.filter(function(el) {
-                    return el._id.toString() !== user.id;
+                    return el._id.toString() !== user._id;
                 });
             break;
             default:

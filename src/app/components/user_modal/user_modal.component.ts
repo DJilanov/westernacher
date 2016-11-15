@@ -19,7 +19,7 @@ export class UserModalComponent {
             'firstName': '',
             'lastName': '',
             'emailAddress': '',
-            'dateOfBirth': ''
+            'dateOfBirth': Date()
         },
         'action': '',
         'title': '', 
@@ -45,9 +45,6 @@ export class UserModalComponent {
         this.userModal.hide();
     }
 
-    /**
-     * @constructor on init
-     */
     constructor(
         private dictionary: Dictionary,
         private eventEmiterService: EventEmiterService

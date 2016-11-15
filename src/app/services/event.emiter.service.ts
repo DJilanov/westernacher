@@ -17,16 +17,6 @@ export class EventEmiterService {
     public workingOffline: EventEmitter<any>;
     public userListUpdates: EventEmitter<any>;
 
-    constructor() {
-        this.updateUser = new EventEmitter();
-        this.dataFetched = new EventEmitter();
-        this.showUserModal = new EventEmitter();
-        this.hideUserModal = new EventEmitter();
-        this.workingOnline = new EventEmitter();
-        this.workingOffline = new EventEmitter();
-        this.userListUpdates = new EventEmitter();
-    }
-
     /**
     * @emitUpdateUser emit with information about updated user
     * @data {Object} data to emit
@@ -80,5 +70,15 @@ export class EventEmiterService {
     */
     public emitWorkingOffline(data):void {
         this.workingOffline.emit(data);
+    }
+
+    constructor() {
+        this.updateUser = new EventEmitter();
+        this.dataFetched = new EventEmitter();
+        this.showUserModal = new EventEmitter();
+        this.hideUserModal = new EventEmitter();
+        this.workingOnline = new EventEmitter();
+        this.workingOffline = new EventEmitter();
+        this.userListUpdates = new EventEmitter();
     }
 }

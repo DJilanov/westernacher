@@ -13,12 +13,6 @@ export class SearchComponent {
     users: Array<Object>;
 
     private searchQuery:string = '';
-
-    constructor(
-        private dictionary: Dictionary
-    ) {
-      this.addTypeaheadField();
-    };
     // add typeahed search
     private addTypeaheadField() {
     //   let params = '';
@@ -35,4 +29,11 @@ export class SearchComponent {
     //                                                 this.products[productCounter]['make'] + ' ' + params;
     //   }
     }
+    
+
+    constructor(
+        private dictionary: Dictionary
+    ) {
+      this.addTypeaheadField();
+    };
 }

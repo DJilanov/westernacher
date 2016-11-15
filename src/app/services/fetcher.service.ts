@@ -52,5 +52,7 @@ export class FetcherService {
         return this.http.delete( usersUrl );
     }
 
-    constructor( private http: Http ) {}
+    constructor( 
+        private http: Http 
+    ) {}
 }

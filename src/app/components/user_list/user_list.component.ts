@@ -51,7 +51,7 @@ export class UserListComponent {
     }
 
     /**
-    * @editUser used to show edit user modal
+    * @editUser used to show edit user modal that is filled by the user data
     * @user {Object} user options
     */
     private editUser(user):void {
@@ -70,7 +70,7 @@ export class UserListComponent {
     }
 
     /**
-    * @addNewUser used to show create user modal
+    * @addNewUser used to show create user modal that is empty
     */
     private addNewUser():void {
         this.eventEmiterService.emitShowUserModal({
@@ -91,13 +91,10 @@ export class UserListComponent {
     * @setBackEndStatus used to show the status of the back-end to the user
     * @status {String} status
     */
-    private setBackEndStatus(status:string) {
+    private setBackEndStatus(status:string):void {
         this.backendStatus = this.statusEnum[status];
     }
 
-    /**
-     * @constructor on init
-     */
     public constructor(
         private statusEnum: StatusEnum,
         private dictionary: Dictionary,

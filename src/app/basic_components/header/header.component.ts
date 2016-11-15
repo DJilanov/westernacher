@@ -9,14 +9,14 @@ import { Dictionary } from '../../language/dictionary.service';
 
 export class HeaderComponent {
 
-    constructor(
-        private dictionary: Dictionary
-    ) {};
-
     /**
     * @changeLanguage handle the icon click and change the language of the app
     */
     private changeLanguage():void {
       this.dictionary.changeLanguage();
     }
+
+    constructor(
+        private dictionary: Dictionary
+    ) {};
 }
